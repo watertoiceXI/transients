@@ -102,7 +102,7 @@ def local_linear(points,l_frame=5,verify=False,rot=True,nearest=False):
     if nearest:
         frame_assignment = np.argmin(np.sum((np.expand_dims(np.expand_dims(frame_centers,1),1)-np.expand_dims(points[:-1,1:,:],0))**2,axis=3),axis=0)
     else:
-        print(np.linspace(0,points.shape[1],numframes))
+        #print(np.linspace(0,points.shape[1],numframes))
         frame_assignment = np.expand_dims(np.arange(len(frame_centers)),axis=0).repeat(points.shape[1],axis=0).T
     As = []
     for q in range(numframes):
@@ -112,7 +112,7 @@ def local_linear(points,l_frame=5,verify=False,rot=True,nearest=False):
         if rot: these_pnts = (R @ these_pnts.T).T
         these_dpnts = points[times+1,instances,:]-points[times,instances,:]
         if rot: these_dpnts = (R @ these_dpnts.T).T
-        print(len(times))
+        #print(len(times))
         A = normaleq(these_pnts,these_dpnts)
         As.append(copy.copy(A))
         v,e = np.linalg.eig(A)
